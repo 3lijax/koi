@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Digit Pro | Advanced Trading Analytics</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-background">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="app-container">
+
+        <!-- LOGIN VIEW -->
+        <section id="login-view" class="view active">
+            <div class="login-card glass-panel">
+                <div class="brand-header">
+                    <div class="logo-icon glow-pulse">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h1>Profit Digit Pro</h1>
+                    <p class="subtitle">Institutional Grade Trading Analytics</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" id="username" placeholder="Enter ID" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="remember-me" checked>
+                            <span class="checkmark"></span>
+                            <span class="text">Remember me</span>
+                        </label>
+                        <a href="mailto:support@profitdigitpro.com" class="forgot-pass">Need help?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary glow-effect big-btn">
+                        <span class="btn-text">Launch Terminal</span> <i class="fa-solid fa-rocket"></i>
+                    </button>
+                </form>
+
+                <div class="access-section">
+                    <div class="access-info">
+                        <div class="price-tag-modern">
+                            <span class="plan-name">LIFETIME LICENSE</span>
+                            <div class="price-row">
+                                <span class="currency">$</span>
+                                <span class="amount">100.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="btn-social btn-whatsapp"
+                            onclick="window.location.href='https://wa.me/254742353280'">
+                            <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
+                        </button>
+                        <button class="btn-social btn-telegram"
+                            onclick="window.location.href='https://t.me/placeholder'">
+                            <i class="fa-brands fa-telegram"></i> <span>Telegram</span>
+                        </button>
+                    </div>
+                </div>
+
+                <footer class="login-footer">
+                    <p>Secured by 256-bit Encryption</p>
+                    <p class="copyright">&copy; 2026 Profit Digit Pro</p>
+                </footer>
+            </div>
+        </section>
+
+        <!-- DASHBOARD VIEW -->
+        <section id="dashboard-view" class="view hidden">
+
+            <div class="dashboard-container">
+                <!-- Sidebar Control Panel -->
+                <aside class="sidebar glass-panel">
+                    <div class="sidebar-header">
+                        <div class="logo-small">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Config</h3>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Index Category</label>
+                        <select id="market-category-select" class="custom-select">
+                            <option value="volatility">Volatility Indices</option>
+                            <option value="boom_crash">Boom & Crash</option>
+                            <option value="step">Step Indices</option>
+                            <option value="jump">Jump Indices</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Index Asset</label>
+                        <select id="asset-select" class="custom-select">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Strategy</label>
+                        <select id="strategy-select" class="custom-select">
+                            <option value="even_odd">Even / Odd</option>
+                            <option value="matches_differs">Matches / Differs</option>
+                            <option value="over_under">Over / Under</option>
+                        </select>
+                    </div>
+
+                    <!-- Prediction Button -->
+                    <button id="predict-btn" class="btn-predict glow-effect">
+                        <i class="fa-solid fa-brain"></i> Analyze & Predict
+                    </button>
+
+                    <div class="prediction-result glass-inset hidden" id="prediction-result-panel">
+                        <span class="pred-label">Prediction:</span>
+                        <div class="pred-value" id="final-prediction">--</div>
+                        <div class="confidence-meter">
+                            <div class="meter-bar" id="confidence-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="conf-text" id="confidence-text">Confidence: 0%</span>
+                    </div>
+
+                    <div class="spacer"></div>
+
+                    <button id="logout-btn" class="btn-secondary small">
+                        <i class="fa-solid fa-power-off"></i> Logout
+                    </button>
+
+                </aside>
+
+                <!-- Main Content Area -->
+                <main class="main-content">
+
+                    <header class="top-bar glass-panel">
+                        <div class="market-info">
+                            <h2 id="market-title">Volatility 10 Index</h2>
+                            <span class="status-badge live">Live Feed</span>
+                        </div>
+                        <span class="last-update" id="clock-display">--:--:--</span>
+                    </header>
+
+                    <div class="dashboard-grid-new">
+
+                        <!-- Live Chart Area -->
+                        <div class="card chart-card glass-panel span-full">
+                            <div class="card-header flex-between">
+                                <span><i class="fa-solid fa-chart-line"></i> Market Pulse</span>
+                                <div class="price-display">
+                                    <span class="label">Current:</span>
+                                    <span class="value" id="current-price">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="chart-container-large">
+                                <canvas id="tickChart"></canvas>
+                                <div class="last-digit-floating" id="last-digit-box">
+                                    <span class="digit-title">LDT</span>
+                                    <span class="digit-val" id="last-digit">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats & Analysis Row -->
+                        <div class="card stats-card glass-panel">
+                            <div class="card-header">
+                                <i class="fa-solid fa-chart-pie"></i> Signal Statistics
+                            </div>
+                            <div class="stats-content" id="stats-content">
+                                <!-- Dynamic Content based on Strategy -->
+                                <div class="default-stats">
+                                    <div class="stat-row">
+                                        <span>Even</span>
+                                        <div class="progress">
+                                            <div class="bar" id="stat-bar-1"></div>
+                                        </div>
+                                        <span id="stat-val-1">--%</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Odd</span>
+                                        <div class="progress">
+                                            <div class="bar" id="stat-bar-2"></div>
+                                        </div>
+                                        <span id="stat-val-2">--%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Digit Frequency Heatmap -->
+                        <div class="card freq-card glass-panel">
+                            <div class="card-header">
+                                <i class="fa-solid fa-hashtag"></i> Digit Heatmap (Last 100)
+                            </div>
+                            <div class="digit-grid-new" id="digit-grid">
+                                <!-- JS Generated -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                </main>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
